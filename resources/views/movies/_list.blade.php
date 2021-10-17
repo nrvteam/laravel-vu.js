@@ -18,10 +18,10 @@
                             <td class="movie-genre">
                                 {{$movie->genre}}
                             </td>
-                            <td class="movie-description hidden">
+                            <td class="movie-description d-none">
                                 {{$movie->detail}}
                             </td>
-                            <td class="movie-image hidden">
+                            <td class="movie-image d-none">
                                 {{asset("storage")."/".$movie->url_image}}
                             </td>
                             <td>
@@ -40,7 +40,7 @@
                 </tbody>
             </table>
             <div class="pagination">
-                {{$movies->render()}}
+                {{$movies->links('pagination::bootstrap-4')}}
             </div>
         </div>
     @else

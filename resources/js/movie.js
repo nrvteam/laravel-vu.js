@@ -31,10 +31,11 @@ searchForm.addEventListener("keyup", async (event) => {
     });
 })
 
-$('#modal-movie').on('show.bs.modal', function (event) {
-    const button = $(event.relatedTarget);
+window.$(document).on('show.bs.modal', '#modal-movie', function (event) {
+    console.log('modal-movie loaded')
+    const button = window.$(event.relatedTarget);
     const movieId = button.data('movie-id');
-    const modal = $(this);
+    const modal = window.$(this);
     modal.find('#movie-id').val(movieId);
     modal.find('.modal-title').text('Detail of the movie');
     modal.find('.modal-movie-image').attr('src', button.parents('tr').children('.movie-image').text());

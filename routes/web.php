@@ -15,3 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','App\Http\Controllers\MovieController@home')->name('home');
 Route::get('/search','App\Http\Controllers\MovieController@search')->name('search');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
