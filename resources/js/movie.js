@@ -30,3 +30,15 @@ searchForm.addEventListener("keyup", async (event) => {
         return null
     });
 })
+
+$('#modal-movie').on('show.bs.modal', function (event) {
+    const button = $(event.relatedTarget);
+    const movieId = button.data('movie-id');
+    const modal = $(this);
+    modal.find('#movie-id').val(movieId);
+    modal.find('.modal-title').text('Detail of the movie');
+    modal.find('.modal-movie-image').attr('src', button.parents('tr').children('.movie-image').text());
+    modal.find('.modal-movie-title').text(button.parents('tr').children('.movie-name').text());
+    modal.find('.modal-movie-genre').text("Genre:"  + button.parents('tr').children('.movie-genre').text());
+    modal.find('.modal-movie-description').text("Description:"  + button.parents('tr').children('.movie-description').text());
+});
