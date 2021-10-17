@@ -22,4 +22,12 @@ class MovieController extends Controller
      * @var int
      */
     protected $primaryKey = 'id';
+
+    public function home() : Response{
+        return response()->view('movies.index',['movies' => []]);
+    }
+
+    public function search(): JsonResponse {
+        return response()->json([]);
+    }
 }
