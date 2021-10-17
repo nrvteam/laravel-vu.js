@@ -23,11 +23,33 @@ class MovieController extends Controller
      */
     protected $primaryKey = 'id';
 
-    public function home() : Response{
-        return response()->view('movies.index',['movies' => []]);
+    public function home(Request $request) : Response{
+        $result = Movie::paginate(10);
+        $validator = Validator::make($request->all(), [
+            'query' => 'required|min:3|max:250'
+        ]);
+        if(!$validator->fails()){
+            $searchTerm = $request->get('query');
+            $result = Movie::where('name', 'like', "%{$searchTerm}%")
+                ->orWhere('genre', 'like', "%{$searchTerm}%")
+                ->paginate(10);
+        }
+
+        return response()->view('movies.index',['movies' => $result]);
     }
 
-    public function search(): JsonResponse {
-        return response()->json([]);
+    public function search(Request $request): JsonResponse {
+        $result = [];
+        $validator = Validator::make($request->all(), [
+            'query' => 'required|min:3|max:250'
+        ]);
+        if(!$validator->fails()){
+            $searchTerm = $request->get('query');
+            $result = Movie::where('name', 'like', "%{$searchTerm}%")
+                ->orWhere('genre', 'like', "%{$searchTerm}%")
+                ->get()
+                ->toArray();
+        }
+        return response()->json($result);
     }
 }

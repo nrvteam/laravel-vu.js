@@ -1,3 +1,7 @@
 body {
     font-family: 'Nunito', sans-serif;
 }
+
+.pagination {
+    justify-content: center!important;
+}
