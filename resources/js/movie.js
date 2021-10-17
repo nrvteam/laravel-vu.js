@@ -1,22 +1,22 @@
-const searchForm = document.getElementById("search-box")
-
-searchForm.addEventListener("keydown", async ({key}) => {
+window.$(document).on('keydown', '#search-box', async ({key}) => {
     if (key === "Enter"){
+        const searchForm = window.$("#search-box");
         await axios.get('/', {
             'params':{
-                query: searchForm.value
+                query: searchForm.val()
             }
         }).then((response) => {
-            window.location = "/?query="+searchForm.value
+            window.location = "/?query="+searchForm.val()
         });
     }
 })
 
-searchForm.addEventListener("keyup", async (event) => {
+window.$(document).on('keyup', '#search-box', async (event) => {
     event.preventDefault();
+    const searchForm = window.$("#search-box");
     await axios.get('/search', {
         'params':{
-            query: searchForm.value
+            query: searchForm.val()
         }
     }).then((response) => {
         const data = response.data;
@@ -32,7 +32,6 @@ searchForm.addEventListener("keyup", async (event) => {
 })
 
 window.$(document).on('show.bs.modal', '#modal-movie', function (event) {
-    console.log('modal-movie loaded')
     const button = window.$(event.relatedTarget);
     const movieId = button.data('movie-id');
     const modal = window.$(this);

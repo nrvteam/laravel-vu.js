@@ -2199,10 +2199,9 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var searchForm = document.getElementById("search-box");
-searchForm.addEventListener("keydown", /*#__PURE__*/function () {
+window.$(document).on('keydown', '#search-box', /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(_ref) {
-    var key;
+    var key, searchForm;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -2210,20 +2209,21 @@ searchForm.addEventListener("keydown", /*#__PURE__*/function () {
             key = _ref.key;
 
             if (!(key === "Enter")) {
-              _context.next = 4;
+              _context.next = 5;
               break;
             }
 
-            _context.next = 4;
+            searchForm = window.$("#search-box");
+            _context.next = 5;
             return axios.get('/', {
               'params': {
-                query: searchForm.value
+                query: searchForm.val()
               }
             }).then(function (response) {
-              window.location = "/?query=" + searchForm.value;
+              window.location = "/?query=" + searchForm.val();
             });
 
-          case 4:
+          case 5:
           case "end":
             return _context.stop();
         }
@@ -2235,17 +2235,19 @@ searchForm.addEventListener("keydown", /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }());
-searchForm.addEventListener("keyup", /*#__PURE__*/function () {
+window.$(document).on('keyup', '#search-box', /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(event) {
+    var searchForm;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
             event.preventDefault();
-            _context2.next = 3;
+            searchForm = window.$("#search-box");
+            _context2.next = 4;
             return axios.get('/search', {
               'params': {
-                query: searchForm.value
+                query: searchForm.val()
               }
             }).then(function (response) {
               var data = response.data;
@@ -2261,7 +2263,7 @@ searchForm.addEventListener("keyup", /*#__PURE__*/function () {
               return null;
             });
 
-          case 3:
+          case 4:
           case "end":
             return _context2.stop();
         }
@@ -2274,7 +2276,6 @@ searchForm.addEventListener("keyup", /*#__PURE__*/function () {
   };
 }());
 window.$(document).on('show.bs.modal', '#modal-movie', function (event) {
-  console.log('modal-movie loaded');
   var button = window.$(event.relatedTarget);
   var movieId = button.data('movie-id');
   var modal = window.$(this);
