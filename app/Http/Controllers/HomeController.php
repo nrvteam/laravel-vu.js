@@ -26,6 +26,27 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('home');
+        $userId = Auth::id();
+        $isAdmin = $this->isAdmin($user);
+        $movies = $user->movies()->paginate(10);
+        return view('home', [
+            'is_admin' => $isAdmin,
+            'movies' => $movies
+        ]);
+    }
+
+    /**
+     * @param \Illuminate\Contracts\Auth\Authenticatable|null $user
+     * @return bool
+     */
+    private function isAdmin(?\Illuminate\Contracts\Auth\Authenticatable $user): bool
+    {
+        $isAdmin = false;
+        foreach ($user->role as $role) {
+            if ($role->name == 'admin') {
+                $isAdmin = true;
+            }
+        }
+        return $isAdmin;
     }
 }

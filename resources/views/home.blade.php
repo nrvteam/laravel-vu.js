@@ -13,8 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    @include ('movies/_list')
+                    <button
+                        type="button"
+                        class="btn btn-sm btn-primary"
+                        data-toggle="modal"
+                        data-target="#modal-movie"
+                    > Add movie</button><hr/>
+                        <h3>My movies</h3>
+                    @include ('manager/_list')
                 </div>
             </div>
         </div>
