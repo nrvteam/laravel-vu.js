@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    @include ('movies/_list')
                 </div>
             </div>
         </div>

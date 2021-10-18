@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','App\Http\Controllers\MovieController@home')->name('home');
+Route::get('/','App\Http\Controllers\MovieController@home')->name('root');
 Route::get('/search','App\Http\Controllers\MovieController@search')->name('search');
 
 Auth::routes();
